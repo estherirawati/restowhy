@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../data/api/api_service.dart';
 import '../data/model/restaurant_search.dart';
+import 'package:http/http.dart' as http;
 
 enum ResultState { loading, noData, hasData, error }
 
@@ -33,7 +34,7 @@ class RestoSearchProvider extends ChangeNotifier {
     try {
       _state = ResultState.loading;
       notifyListeners();
-      final resto = await apiService.restaurantSearch(query);
+      final resto = await apiService.restaurantSearch(query,http.Client());
       _state = ResultState.hasData;
       _restoSearchResult = resto;
       notifyListeners();

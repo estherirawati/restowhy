@@ -1,7 +1,7 @@
 import 'dart:isolate';
 import 'dart:math';
 import 'dart:ui';
-
+import 'package:http/http.dart' as http;
 import 'package:resto/data/api/api_service.dart';
 
 import '../main.dart';
@@ -23,7 +23,7 @@ class BackgroundService {
 
   static Future<void> callback() async {
     print('Alarm aktif');
-    var result = await ApiService().restaurants();
+    var result = await ApiService().restaurants(http.Client());
     final NotificationHelper notificationHelper = NotificationHelper();
     var randomIdx = Random().nextInt(result.restaurants.length);
     await notificationHelper.showNotification(

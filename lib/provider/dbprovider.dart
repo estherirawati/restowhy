@@ -20,7 +20,7 @@ class DbProvider extends ChangeNotifier{
     await _dbHelper.insertResto(resto);
     _getAllResto();
   }
-  Future<bool> getRestoById(String id) async{
+  Future<Map> getRestoById(String id) async{
     return await _dbHelper.getRestoById(id);
   }
   Future<void> updateResto(Restaurant resto) async{

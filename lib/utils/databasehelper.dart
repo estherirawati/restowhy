@@ -38,11 +38,15 @@ class DatabaseHelper {
     List<Map<String,dynamic>> results = await db.query(_tableName);
     return results.map((res)=> Restaurant.fromJson(res)).toList();
   }
-  Future<bool> getRestoById(String id) async{
+  Future<Map> getRestoById(String id) async{
     final Database db = await database;
     List<Map<String,dynamic>> results = await db.query(_tableName,
         where:"id=?", whereArgs: [id]);
-    return (results==null);
+    if (results.isNotEmpty) {
+      return results.first;
+    } else {
+      return {};
+    }
   }
   Future<void> updateResto(Restaurant resto) async{
     final Database db = await database;
